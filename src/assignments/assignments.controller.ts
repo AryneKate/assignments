@@ -41,4 +41,19 @@ export class AssignmentsController {
     }
     return true;
   }
+  // Assignment 3: Factorial Calculator
+  @Get('factorial/:number')
+  getFactorial(@Param('number') number: string) {
+    const num = parseInt(number, 10);
+    if (isNaN(num) || num < 0) {
+      return { error: 'Please provide a non-negative integer.' };
+    }
+    
+    const factorial = this.calculateFactorial(num);
+    return { factorial };
+  }
+
+  private calculateFactorial(n: number): number {
+    return n <= 1 ? 1 : n * this.calculateFactorial(n - 1);
+  }
 }
